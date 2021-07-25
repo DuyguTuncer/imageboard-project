@@ -1,10 +1,33 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>My Imageboard</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <h1>My Image board</h1>
+   
+    <!-- This code is for our Vue code instance -->
+
+    <div id="main">
+
+            <h2>HIIII {{name}}!! Vue is awsome!</h2>
+            <h2>10*2 = {{10*2}}</h2>
+            <h2>Name capitalized is {{name.toUpperCase() }}</h2>
+            <h3 v-if="seen"> Yayy you can see this! </h3>
+            <h3 v-else="seen"> seen is falsey you can see this </h3>
+
+            <ul>
+                <li v-for="city in cities" :key="city.id"> {{city.name}}, {{city.country}}</li>
+            </ul>
+    </div>
+
+
+
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
