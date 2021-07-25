@@ -1,3 +1,37 @@
 * {
-    background-color: rgb(209, 241, 209);
+    background-color: rgb(223, 242, 250)
 }
+
+.images-parent{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    border: 2px, solid,grey;
+    border-radius: 5px;;
+}
+
+#images-child {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    background-color:whitesmoke;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+#images{
+    width:300px;
+    height: 250px;
+    margin-top:10px;
+}
+
+#images-title{
+    width: 100%;
+}
+
+#images-description{
+    width: 100%;
+}
+

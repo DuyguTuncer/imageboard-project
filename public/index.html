@@ -1,30 +1,23 @@
 <!doctype html>
 <html>
 <head>
-    <title>My Imageboard</title>
+    <title>Vue vueee - My Imageboard</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>My Image board</h1>
-   
-    <!-- This code is for our Vue code instance -->
+    
+    <div id='main'>
+        <h1>{{name}}</h1>
+        <div class="images-parent">
+            <div v-for='image in images' :key='image.id' id="images-child">
+                     <img src="image.url" id="images"> 
+                     <!-- Check rendering the photos -->
+                    <h2 id="images-title">{{image.title}}</h2>
+                    <p id="images-title">{{image.description}}</p>
 
-    <div id="main">
-
-            <h2>HIIII {{name}}!! Vue is awsome!</h2>
-            <h2>10*2 = {{10*2}}</h2>
-            <h2>Name capitalized is {{name.toUpperCase() }}</h2>
-            <h3 v-if="seen"> Yayy you can see this! </h3>
-            <h3 v-else="seen"> seen is falsey you can see this </h3>
-
-            <ul>
-                <li v-for="city in cities" :key="city.id"> {{city.name}}, {{city.country}}</li>
-            </ul>
+            </div>
+        </div>
     </div>
-
-
-
-
 
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
