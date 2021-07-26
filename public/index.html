@@ -8,12 +8,17 @@
     
     <div id='main'>
         <h1>{{name}}</h1>
+        <div id="upload">
+            <input v-model="title" name="title">
+            <input v-model="description" name="description">
+            <input v-model="username" name="username">
+            <input type="file" @change="userFileSelection" accept="image/*">
+            <button @click="uploadImage">Upload</button>
+        </div>
         <div class="images-parent">
             <div v-for='image in images' :key='image.id' id="images-child">
-                     <img v-bind:src="image.url" id="images"> 
-                     
+                     <img v-bind:src="image.url" v-bind:alt="image.description" id="images"> 
                     <h2 id="images-title">{{image.title}}</h2>
-                    <p id="images-title">{{image.description}}</p>
 
             </div>
         </div>
