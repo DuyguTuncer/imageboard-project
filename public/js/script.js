@@ -40,10 +40,13 @@
                 formData.append("description", description);
                 formData.append("username", username);
                 formData.append("file", file);
-                axios.post("/upload", formData).then(({ data }) => {
-                    // take the image object returned and put it into the existing array
-                    // this.file = data;
-                    console.log("data in uploadImage:", data);
+                axios.post("/upload", formData).then((results) => {
+                    this.images.unshift({
+                        url: results.data.url,
+                        username: results.data.username,
+                        title: results.data.title,
+                        description: results.data.description,
+                    });
                 });
             },
             userFileSelection: function (event) {

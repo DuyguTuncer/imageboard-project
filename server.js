@@ -39,10 +39,6 @@ app.get("/imageboard", (req, res) => {
         });
 });
 
-// uploder.single("file") file: is the name of the form data property that holds the file.
-// multer will put title, desc, etc to the --> req.body.
-// differnt for file: where the file is going to be added to the req object, file property. --> req.file
-
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("req.body", req.body);
     console.log("req.file", req.file);
@@ -58,7 +54,12 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     )
         .then(({ rows }) => {
             console.log("results", rows);
-            // res.json(rows);
+            res.json({
+                title: req.body.title,
+                description: req.body.description,
+                username: req.body.username,
+                url: rows[0].url
+            });
         })
         .catch((err) => console.log("Error in uploading image", err));
 

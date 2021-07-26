@@ -7,20 +7,30 @@ if (process.env.NODE_ENV == "production") {
 } else {
     secrets = require("./secrets"); // in dev they are in secrets.json which is listed in .gitignore
 }
+// console.log("secrets", secrets.AWS_KEY, secrets.AWS_SECRET);
 
 const s3 = new aws.S3({
     accessKeyId: secrets.AWS_KEY,
     secretAccessKey: secrets.AWS_SECRET,
 });
 
-exports.upload = (req, res, next ) => {
-    if(!req.file) {
+// console.log("s3 ", s3);
+
+exports.upload = (req, res, next) => {
+    if (!req.file) {
         return res.sendStatus(500);
     }
     // console.log("req.file in upload function S3");
 
     // there should be file/img upload if we come here
-    const{filename, mimetype, size, path} = req.file;
+    const { filename, mimetype, size, path } = req.file;
+    console.log(
+        "filename, mimetype, size, path",
+        filename,
+        mimetype,
+        size,
+        path
+    );
 
     const promise = s3
         .putObject({
@@ -46,5 +56,4 @@ exports.upload = (req, res, next ) => {
             console.log("err in s3 upload put object: ", err);
             res.sendStatus(404);
         });
-
 };
