@@ -22,7 +22,7 @@
                 .catch((err) => console.log("err in /imageboard: ", err));
         },
 
-        // v-model works only with the value of the form.
+        // v-model works only with the value of the form
 
         methods: {
             uploadImage: function () {
@@ -43,9 +43,9 @@
                 axios.post("/upload", formData).then((results) => {
                     this.images.unshift({
                         url: results.data.url,
-                        username: results.data.username,
                         title: results.data.title,
                         description: results.data.description,
+                        username: results.data.username,
                     });
                 });
             },
