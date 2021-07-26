@@ -4,7 +4,7 @@
         data: {
             name: "Scallion",
             images: [],
-        }, // data ends here
+        },
         mounted: function () {
             console.log("my vue instance has mounted");
             console.log("this OUTSIDE of axios: ", this);

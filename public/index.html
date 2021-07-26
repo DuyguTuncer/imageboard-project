@@ -10,8 +10,8 @@
         <h1>{{name}}</h1>
         <div class="images-parent">
             <div v-for='image in images' :key='image.id' id="images-child">
-                     <img src="image.url" id="images"> 
-                     <!-- Check rendering the photos -->
+                     <img v-bind:src="image.url" id="images"> 
+                     
                     <h2 id="images-title">{{image.title}}</h2>
                     <p id="images-title">{{image.description}}</p>
 

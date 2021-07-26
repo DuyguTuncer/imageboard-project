@@ -11,7 +11,7 @@ app.get("/imageboard", (req, res) => {
             res.json(images);
         })
         .catch((err) => {
-            console.log("error in /imageboard: ", err);
+            console.log("error in /imageboard : ", err);
             return err;
         });
 });
