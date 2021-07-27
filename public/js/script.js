@@ -1,4 +1,37 @@
 (function () {
+    // register vue component
+    
+    Vue.component("popup-image-component", {
+        template: "#popup-image-component-template",
+        props: ["imageId"],
+        data: function () {
+            return {
+                popupImageData : null
+            };
+        },
+        mounted: function () {
+            // console.log("my first component mounted", this);
+            console.log("this.imageId", this.imageId);
+            axios
+                .get("/imageboard")
+                .then((results) => {
+                    // console.log("this.images:", this.images);
+                    this.popupImageData = results.data;
+                    console.log(" results.data in popupImagedata", results.data);
+                    console.log("this.popupImageData", this.popupImageData);
+                })
+                .catch((err) => console.log("err in component axios: ", err));
+        },
+
+        // function for click
+        methods: {
+            xClicked: function () {
+                console.log("xClicked, emiter works");
+                this.$emit("close");
+            },
+        },
+    });
+
     new Vue({
         el: "#main",
         data: {
@@ -8,21 +41,17 @@
             description: "",
             username: "",
             file: null,
+            imageSelected: null,
         },
         mounted: function () {
             axios
                 .get("/imageboard")
                 .then((results) => {
-                    console.log("results.data: ", results.data);
-                    console.log("this INSIDE of axios: ", this);
-                    console.log("this.images:", this.images);
-                    console.log("this.title:", this.title);
+                    // console.log("this.images:", this.images);
                     this.images = results.data;
                 })
                 .catch((err) => console.log("err in /imageboard: ", err));
         },
-
-        // v-model works only with the value of the form
 
         methods: {
             uploadImage: function () {
@@ -32,8 +61,6 @@
                 var username = this.username;
                 var file = this.file;
                 console.log("this", this);
-
-                // files are going to be sent as chunks
 
                 var formData = new FormData();
                 formData.append("title", title);
@@ -51,6 +78,16 @@
             },
             userFileSelection: function (event) {
                 this.file = event.target.files[0];
+            },
+
+            // part 3
+            selectImage: function (id) {
+                console.log("id passed to selectedImage", id);
+                this.imageSelected = id;
+            },
+            closeMe: function () {
+                console.log("the component emited close");
+                this.imageSelected = null;
             },
         },
     });

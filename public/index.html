@@ -14,15 +14,35 @@
             <input type="file" @change="userFileSelection" accept="image/*">
             <button @click="uploadImage">Upload</button>
         </div>
+
+       
+        <!-- in order to pass dynamic values, we need to bind image with image-id -->
+        <!-- it is equavalent with v-model in input fields -->
+        <!-- :image-id="imageSelected" here, we are linking two values together-->
+ 
+        <popup-image-component v-if="imageSelected" :image-id="imageSelected" @close="closeMe"></popup-image-component>
+
+        <!-- <h3 class="images-component" v-for="image in images" @click="selectImage (image.id)">
+            {{image.title}}
+        </h3> -->
+
         <div class="images-parent">
             <div v-for='image in images' :key='image.id' id="images-child">
-                     <img v-bind:src="image.url" v-bind:alt="image.description" id="images"> 
+                     <img v-bind:src="image.url" v-bind:alt="image.description" id="images" @click="selectImage (image.id)"> 
                     <h2 id="images-title">{{image.title}}</h2>
 
             </div>
         </div>
-    </div>
+    </div> 
 
+        <!-- this script tag is related to the vue.component, so close feature is going to go to the component -->
+    <script id="popup-image-component-template" type="text/x-template">
+        <div class="component">
+            <p >Selected Image</p>
+            <h1 @click="xClicked">X</h1>
+            <h1> {{popupImageData}}</h1>
+        </div>
+    </script>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/script.js"></script>

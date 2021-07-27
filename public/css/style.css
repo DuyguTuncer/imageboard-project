@@ -1,5 +1,6 @@
 * {
-    background-color: rgb(223, 242, 250)
+    background-color: rgb(223, 242, 250);
+    /* margin: 0; */
 }
 
 .images-parent{
@@ -7,7 +8,7 @@
     flex-direction: row;
     margin: 20px;
     border: 2px, solid,grey;
-    border-radius: 5px;;
+    border-radius: 5px;
 }
 
 #images-child {

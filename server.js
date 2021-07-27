@@ -62,13 +62,6 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             });
         })
         .catch((err) => console.log("Error in uploading image", err));
-
-    // if (!req.file) {
-    //     console.log("upload failed for some reason!");
-    //     res.sendStatus(500);
-    // } else {
-    //     // yay, it worked
-    // }
 });
 
 app.listen(8080, () => console.log("Listening 8080, this time for imageboard!"));
