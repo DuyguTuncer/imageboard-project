@@ -55,10 +55,11 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         .then(({ rows }) => {
             console.log("results", rows);
             res.json({
+                id: rows[0].id,
                 title: req.body.title,
                 description: req.body.description,
                 username: req.body.username,
-                url: rows[0].url
+                url: rows[0].url,
             });
         })
         .catch((err) => console.log("Error in uploading image", err));

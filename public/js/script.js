@@ -16,9 +16,12 @@
                 .get("/imageboard")
                 .then((results) => {
                     // console.log("this.images:", this.images);
-                    this.popupImageData = results.data;
-                    console.log(" results.data in popupImagedata", results.data);
-                    console.log("this.popupImageData", this.popupImageData);
+
+                    const filtered = results.data.filter((obj) => obj.id == this.imageId);
+                    this.popupImageData = filtered[0];
+
+                    console.log(" this.popupImageDat", results.data);
+                    
                 })
                 .catch((err) => console.log("err in component axios: ", err));
         },
@@ -35,7 +38,7 @@
     new Vue({
         el: "#main",
         data: {
-            name: "Scallion",
+            name: "My Image Board",
             images: [],
             title: "",
             description: "",
@@ -69,6 +72,7 @@
                 formData.append("file", file);
                 axios.post("/upload", formData).then((results) => {
                     this.images.unshift({
+                        id : results.data.id,
                         url: results.data.url,
                         title: results.data.title,
                         description: results.data.description,
