@@ -16,7 +16,7 @@ module.exports.uploadImage = (url, username, title, description) => {
     );
 };
 
-module.exports.showMoreImages = () => {
+module.exports.showMoreImages = (lastId) => {
     return db.query(
         `
             SELECT *, (
@@ -27,5 +27,6 @@ module.exports.showMoreImages = () => {
             WHERE id < $1
             ORDER BY id DESC
             LIMIT 4;`,
+        [lastId]
     );
-}; 
+};

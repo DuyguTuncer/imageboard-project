@@ -1,5 +1,4 @@
 (function () {
-
     Vue.component("comments-component", {
         template: "#comments-component-template",
         props: [],
@@ -8,12 +7,12 @@
                 popupImageData: null,
             };
         },
+
         methods: {
             test: function () {
                 console.log("I am clicked");
             },
         },
-        
     });
 
     Vue.component("popup-image-component", {
@@ -37,7 +36,8 @@
                     );
                     this.popupImageData = filtered[0];
 
-                    console.log(" this.popupImageDat", results.data);
+                    // console.log("filtered", filtered);
+                    // console.log(" this.popupImageDat", results.data);
                 })
                 .catch((err) => console.log("err in component axios: ", err));
         },
@@ -67,6 +67,11 @@
                 .then((results) => {
                     // console.log("this.images:", this.images);
                     this.images = results.data;
+
+                    // console.log(
+                    //     "results.data in /imageboard axios:",
+                    //     results.data
+                    // );
                 })
                 .catch((err) => console.log("err in /imageboard: ", err));
         },
@@ -109,7 +114,26 @@
                 this.imageSelected = null;
             },
             seeMore: function () {
-                console.log("I clicked the more button");
+                console.log(
+                    "I clicked the more button, this.images: ",
+                    this.images
+                );
+
+                let getLastObjInArray = this.images[this.images.length - 1];
+                let smallestId = getLastObjInArray.id;
+
+                console.log("smallestId:", smallestId);
+
+                axios
+                    .get("/showmore/" + smallestId)
+                    .then((results) => {
+                        console.log("results.data:", results.data);
+                        this.images.push(results.data[0]) +
+                        this.images.push(results.data[1]) +
+                        this.images.push(results.data[2]) +
+                        this.images.push(results.data[3]);
+                    })
+                    .catch((err) => console.log("err in /showmore: ", err));
             },
         },
     });

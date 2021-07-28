@@ -30,7 +30,7 @@ const uploader = multer({
 app.get("/imageboard", (req, res) => {
     db.getImages()
         .then(({ rows }) => {
-            console.log("rows: ", rows);
+            // console.log("rows: ", rows);
             res.json(rows);
         })
         .catch((err) => {
@@ -40,10 +40,11 @@ app.get("/imageboard", (req, res) => {
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("req.body", req.body);
-    console.log("req.file", req.file);
+    // console.log("req.body", req.body);
+    // console.log("req.file", req.file);
 
-    const fullUrl = "https://s3.amazonaws.com/duyguimageboard/" + req.file.filename;
+    const fullUrl =
+        "https://s3.amazonaws.com/duyguimageboard/" + req.file.filename;
     console.log("fullUrl:", fullUrl);
 
     db.uploadImage(
@@ -65,13 +66,16 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         .catch((err) => console.log("Error in uploading image", err));
 });
 
-app.get("/showmore", function (req, res) {
-    db.showMoreImages()
+app.get("/showmore/:smallestId", function (req, res) {
+    console.log("req.params", req.params);
+    db.showMoreImages(req.params.smallestId)
         .then(({ rows }) => {
             console.log("results.rows", rows);
+            res.json(rows);
         })
         .catch((err) => console.log("Erororo in rendering more images", err));
 });
 
-
-app.listen(8080, () => console.log("Listening 8080, this time for imageboard!"));
+app.listen(8080, () =>
+    console.log("Listening 8080, this time for imageboard!")
+);
