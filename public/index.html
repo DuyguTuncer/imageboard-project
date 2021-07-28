@@ -12,28 +12,20 @@
         </div>
         <div id="upload">
             <div>
-                    <label>Title<input v-model="title" name="title"></label>
-                    <label>Description<input v-model="description" name="description"></label>
-                    <label>User Name<input v-model="username" name="username"></label>
-                <div id="choose-file">
-                    <input type="file" @change="userFileSelection" accept="image/*">
-                </div>
+                <input v-model="title" name="title" placeholder="title">
+                <input v-model="description" name="description" placeholder="description">
+                <input v-model="username" name="username" placeholder="username">
+                <!-- <div id="choose-file"> -->
+                    <input type="file" @change="userFileSelection" accept="image/*" id="file" class="inputfile">
+                    <label for="file">Choose a file</label>
+                <!-- </div> -->
                 <div id="upload-file">
                     <button @click="uploadImage" id="upload-button">Upload</button>
                 </div>
             </div>
         </div>
-
-       
-        <!-- in order to pass dynamic values, we need to bind image with image-id -->
-        <!-- it is equavalent with v-model in input fields -->
-        <!-- :image-id="imageSelected" here, we are linking two values together-->
  
         <popup-image-component v-if="imageSelected" :image-id="imageSelected" @close="closeMe"></popup-image-component>
-
-        <!-- <h3 class="images-component" v-for="image in images" @click="selectImage (image.id)">
-            {{image.title}}
-        </h3> -->
 
         <div class="images-parent">
             <div v-for='image in images' :key='image.id' id="images-child">
@@ -44,15 +36,18 @@
         </div>
     </div> 
 
-        <!-- this script tag is related to the vue.component, so close feature is going to go to the component -->
     <script id="popup-image-component-template" type="text/x-template">
         <div class="layout">
             <div class="component">
-                <p>Selected Image</p>
-                <h1 @click="xClicked">X</h1>
-                <img v-bind:src="popupImageData.url">
-                <p> {{popupImageData.title}}</p>
-                <p> {{popupImageData.description}}</p>
+                <!-- <p>Selected Image</p> -->
+                <h1 @click="xClicked" id="x">X</h1>
+                <div>
+                    <img v-bind:src="popupImageData.url" id="popup-image">
+                </div>
+                <div id="popup-title-desc-parent">
+                    <h2 id="popup-image-title">Title: {{popupImageData.title}}</h2>
+                    <h4 id="popup-image-description">Description: {{popupImageData.description}}</h4>
+                </div>
             </div>
         </div>
     </script>
