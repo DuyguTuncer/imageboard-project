@@ -1,12 +1,27 @@
 (function () {
-    // register vue component
-    
+
+    Vue.component("comments-component", {
+        template: "#comments-component-template",
+        props: [],
+        data: function () {
+            return {
+                popupImageData: null,
+            };
+        },
+        methods: {
+            test: function () {
+                console.log("I am clicked");
+            },
+        },
+        
+    });
+
     Vue.component("popup-image-component", {
         template: "#popup-image-component-template",
         props: ["imageId"],
         data: function () {
             return {
-                popupImageData : null
+                popupImageData: null,
             };
         },
         mounted: function () {
@@ -17,16 +32,16 @@
                 .then((results) => {
                     // console.log("this.images:", this.images);
 
-                    const filtered = results.data.filter((obj) => obj.id == this.imageId);
+                    const filtered = results.data.filter(
+                        (obj) => obj.id == this.imageId
+                    );
                     this.popupImageData = filtered[0];
 
                     console.log(" this.popupImageDat", results.data);
-                    
                 })
                 .catch((err) => console.log("err in component axios: ", err));
         },
 
-        // function for click
         methods: {
             xClicked: function () {
                 console.log("xClicked, emiter works");
@@ -72,7 +87,7 @@
                 formData.append("file", file);
                 axios.post("/upload", formData).then((results) => {
                     this.images.unshift({
-                        id : results.data.id,
+                        id: results.data.id,
                         url: results.data.url,
                         title: results.data.title,
                         description: results.data.description,
@@ -92,6 +107,9 @@
             closeMe: function () {
                 console.log("the component emited close");
                 this.imageSelected = null;
+            },
+            seeMore: function () {
+                console.log("I clicked the more button");
             },
         },
     });

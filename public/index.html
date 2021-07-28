@@ -10,31 +10,39 @@
         <div>
             <h1 id="headline"> {{name}}</h1>
         </div>
-        <div id="upload">
-            <div>
-                <input v-model="title" name="title" placeholder="title">
-                <input v-model="description" name="description" placeholder="description">
-                <input v-model="username" name="username" placeholder="username">
-                <!-- <div id="choose-file"> -->
-                    <input type="file" @change="userFileSelection" accept="image/*" id="file" class="inputfile">
-                    <label for="file">Choose a file</label>
-                <!-- </div> -->
-                <div id="upload-file">
-                    <button @click="uploadImage" id="upload-button">Upload</button>
+            <div id="upload">
+                <div>
+                    <input v-model="title" name="title" placeholder="title">
+                    <input v-model="description" name="description" placeholder="description">
+                    <input v-model="username" name="username" placeholder="username">
+                    <!-- <div id="choose-file"> -->
+                        <input type="file" @change="userFileSelection" accept="image/*" id="file" class="inputfile">
+                        <label for="file">Choose a file</label>
+                    <!-- </div> -->
+                    <div id="upload-file">
+                        <button @click="uploadImage" id="upload-button">Upload</button>
+                    </div>
                 </div>
             </div>
-        </div>
  
         <popup-image-component v-if="imageSelected" :image-id="imageSelected" @close="closeMe"></popup-image-component>
 
+        <comments-component></comments-component>
+
         <div class="images-parent">
             <div v-for='image in images' :key='image.id' id="images-child">
-                     <img v-bind:src="image.url" v-bind:alt="image.description" id="images" @click="selectImage (image.id)"> 
+                    <img v-bind:src="image.url" v-bind:alt="image.description" id="images" @click="selectImage (image.id)"> 
                     <h2 id="images-title">{{image.title}}</h2>
 
+                </div>
+            </div>
+             <div id="more-button-parent">
+            <div id="more-button-child">
+                <button @click="seeMore" id="more-button">More</button>
             </div>
         </div>
     </div> 
+
 
     <script id="popup-image-component-template" type="text/x-template">
         <div class="layout">
@@ -51,6 +59,14 @@
             </div>
         </div>
     </script>
+
+     <script id="comments-component-template" type="text/x-template">
+        <div class="comments-component-parent">
+            <h1 @click="test">Hi I am a component for comments section</h1>  
+            
+        </div>
+    </script>
+    
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/script.js"></script>

@@ -65,4 +65,13 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         .catch((err) => console.log("Error in uploading image", err));
 });
 
+app.get("/showmore", function (req, res) {
+    db.showMoreImages()
+        .then(({ rows }) => {
+            console.log("results.rows", rows);
+        })
+        .catch((err) => console.log("Erororo in rendering more images", err));
+});
+
+
 app.listen(8080, () => console.log("Listening 8080, this time for imageboard!"));

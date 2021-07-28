@@ -145,7 +145,7 @@ input {
     position: fixed;
     background-color: black;
     z-index: 3000;
-    
+
 }
 
 #x {
@@ -172,4 +172,19 @@ input {
 #popup-image-title {
     background-color: black;
     color: white;
+}
+
+#more-button-parent {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+
+}
+
+#more-button {
+    background-color: rgb(41, 41, 85);
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+    cursor:pointer;
 }
