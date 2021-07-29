@@ -16,6 +16,14 @@ module.exports.uploadImage = (url, username, title, description) => {
     );
 };
 
+module.exports.getPopup = (id) => {
+    return db.query(
+        `SELECT * FROM images
+    WHERE id = ($1) LIMIT 1`,
+        [id]
+    );
+};
+
 module.exports.showMoreImages = (lastId) => {
     return db.query(
         `

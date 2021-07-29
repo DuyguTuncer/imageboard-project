@@ -27,10 +27,11 @@
  
         <popup-image-component v-if="imageSelected" :image-id="imageSelected" @close="closeMe"></popup-image-component>
 
-        <!-- <comments-component id="comments-component" :image-id="imageSelected"></comments-component> -->
-
         <div class="images-parent">
             <div v-for='image in images' :key='image.id' id="images-child">
+                <!-- delete the way how you handle the clich handler, change here :href="#" + image.id -->
+                <!-- Listen for the has change event -->
+                <!-- make the event listener, in vue instance mounted -->
                     <img v-bind:src="image.url" v-bind:alt="image.description" id="images" @click="selectImage (image.id)"> 
                     <h2 id="images-title">{{image.title}}</h2>
              </div>
@@ -38,7 +39,7 @@
 
         <div id="more-button-parent">
             <div id="more-button-child">
-                <button @click="seeMore" id="more-button">More</button>
+                <button v-if="moreButton" @click="seeMore" id="more-button">More</button>
             </div>
         </div>
     </div> 
@@ -53,7 +54,8 @@
                 <div id="popup-title-desc-parent">
                     <h2 id="popup-image-title">Title: {{popupImageData.title}}</h2>
                     <h4 id="popup-image-description">Description: {{popupImageData.description}}</h4>
-                    <comments-component id="comments-component" :image-id="imageSelected"></comments-component>
+                    <!-- <comments-component id="comments-component" :image-id="imageSelected" :image-id="imageId"></comments-component> -->
+                    <comments-component id="comments-component" :image-id="imageId"></comments-component>
                 </div>
             </div>
         </div>
@@ -65,11 +67,12 @@
             <input v-model="commenttext" name="commenttext" placeholder="comment">
             <input v-model="commentusername" name="commentusername" placeholder="username">
             <button @click="submitComment" id="submit-button">Submit</button>
-            <div v-for='comment in comments' :key="comment.id":key="image.id" id="comments-child">
+            <!-- <div v-for='comment in comments':key="comment.id" :key="image.id" id="comments-child"> -->
+            <div v-for='comment in comments' :key="comment.id" id="comments-child">
                     <!-- <img v-bind:src="image.url" v-bind:alt="image.description" id="images" @click="selectImage (image.id)">  -->
-                    <h2>{{comment.commenttext}}</h2>
-                    <h2>{{comment.commentusername}}</h2>
-                    <h2 id="created-at"></h2>
+                    <h2 id="commenttext">{{comment.comment_text}}</h2>
+                    <h2 id="commentusername">{{comment.username}}</h2>
+                    <!-- <h2 id="created-at"></h2> -->
              </div>
 
         </div>
@@ -80,3 +83,4 @@
     <script src="/js/script.js"></script>
 </body>
 </html>
+

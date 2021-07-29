@@ -40,6 +40,16 @@ app.get("/imageboard", (req, res) => {
         });
 });
 
+app.get("/imageboard/:imageId", (req, res) => {
+    db.getPopup(req.params.imageId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("Erroror in /imageboard/:imageId", err);
+        });
+});
+
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     // console.log("req.body", req.body);
     // console.log("req.file", req.file);
@@ -82,6 +92,7 @@ app.get("/comments/:imageId", function (req, res) {
     db.renderComment(req.params.imageId)
         .then(({ rows }) => {
             console.log("results.rows in comments get", req.params);
+            console.log("rows in /comments/:imageId get req.", rows);
             res.json(rows);
         })
         .catch((err) => console.log(err));
@@ -97,7 +108,7 @@ app.post("/comment", function (req, res) {
         .then(({ rows }) => {
             console.log("results", rows);
             res.json({
-                comment_text: rows[0].comment,
+                comment_text: rows[0].comment_text,
                 username: rows[0].username,
                 image_id: rows[0].image_id,
             });

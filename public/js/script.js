@@ -1,7 +1,7 @@
 (function () {
     Vue.component("comments-component", {
         template: "#comments-component-template",
-        props: ["imageId", "commentId"],
+        props: ["imageId"],
         data: function () {
             return {
                 comments: [],
@@ -11,7 +11,10 @@
         },
 
         mounted: function () {
-            // console.log("component for comments is mounted", this);
+            console.log(
+                "component for comments is mounted heheheh",
+                this.imageId
+            );
             //
             let imageId = this.imageId;
             console.log("imageId", imageId);
@@ -20,6 +23,8 @@
                 .get("/comments/" + imageId)
                 .then((results) => {
                     this.comments = results.data;
+                    // this.comments.push(results.data[0]);
+                    console.log(" this.comments in vue : ", this.comments);
                 })
                 .catch((err) =>
                     console.log("err in comments component axios: ", err)
@@ -38,6 +43,7 @@
 
                     .then((results) => {
                         this.comments.push(results.data);
+                        console.log("this.comments", this.comments);
                     })
                     .catch((err) => {
                         console.log("error in comments post in vue", err);
@@ -51,14 +57,16 @@
         props: ["imageId"],
         data: function () {
             return {
-                popupImageData: null,
+                popupImageData: {},
             };
         },
         mounted: function () {
             // console.log("my first component mounted", this);
             console.log("this.imageId", this.imageId);
+
+            let imageId = this.imageId;
             axios
-                .get("/imageboard")
+                .get("/imageboard/" + imageId)
                 .then((results) => {
                     // console.log("this.images:", this.images);
 
@@ -67,8 +75,8 @@
                     );
                     this.popupImageData = filtered[0];
 
-                    // console.log("filtered", filtered);
-                    // console.log(" this.popupImageDat", results.data);
+                    console.log("filtered[0]", filtered[0]);
+                    console.log(" this.popupImageData", results.data);
                 })
                 .catch((err) => console.log("err in component axios: ", err));
         },
@@ -90,9 +98,11 @@
             description: "",
             username: "",
             file: null,
-            // Username: "",
-            // comment: "",
+            moreButton: true,
             imageSelected: null,
+            //  imageSelected: location.hash.slice(1)
+            // I changed here from null to hash for part 5
+            // make it so when the user clicks, hash changes
         },
         mounted: function () {
             axios
@@ -146,6 +156,8 @@
                 console.log("the component emited close");
                 this.imageSelected = null;
             },
+
+            // part 4
             seeMore: function () {
                 console.log(
                     "I clicked the more button, this.images: ",
@@ -155,16 +167,19 @@
                 let getLastObjInArray = this.images[this.images.length - 1];
                 let smallestId = getLastObjInArray.id;
 
-                console.log("smallestId:", smallestId);
+                // console.log("getLastObjInArray", getLastObjInArray);
+                // console.log("smallestId:", smallestId);
 
                 axios
                     .get("/showmore/" + smallestId)
                     .then((results) => {
                         console.log("results.data:", results.data);
-                        this.images.push(results.data[0]) +
-                            this.images.push(results.data[1]) +
-                            this.images.push(results.data[2]) +
-                            this.images.push(results.data[3]);
+                        for (let i = 0; i < results.data.length; i++) {
+                            this.images.push(results.data[i]);
+                        }
+                        if (results.data.length == 0) {
+                            this.moreButton = false;
+                        }
                     })
                     .catch((err) => console.log("err in /showmore: ", err));
             },
