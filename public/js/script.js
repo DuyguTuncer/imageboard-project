@@ -92,7 +92,7 @@
     new Vue({
         el: "#main",
         data: {
-            name: "My Image Board",
+            name: "Discover the Magical World of Underwater Photography",
             images: [],
             title: "",
             description: "",
@@ -100,9 +100,6 @@
             file: null,
             moreButton: true,
             imageSelected: null,
-            //  imageSelected: location.hash.slice(1)
-            // I changed here from null to hash for part 5
-            // make it so when the user clicks, hash changes
         },
         mounted: function () {
             axios

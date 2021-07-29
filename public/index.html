@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Vue vueee - My Imageboard</title>
+    <title>Underwater Photography</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -15,10 +15,8 @@
                     <input v-model="title" name="title" placeholder="title">
                     <input v-model="description" name="description" placeholder="description">
                     <input v-model="username" name="username" placeholder="username">
-                    <!-- <div id="choose-file"> -->
                         <input type="file" @change="userFileSelection" accept="image/*" id="file" class="inputfile">
                         <label for="file">Choose a file</label>
-                    <!-- </div> -->
                     <div id="upload-file">
                         <button @click="uploadImage" id="upload-button">Upload</button>
                     </div>
@@ -29,9 +27,6 @@
 
         <div class="images-parent">
             <div v-for='image in images' :key='image.id' id="images-child">
-                <!-- delete the way how you handle the clich handler, change here :href="#" + image.id -->
-                <!-- Listen for the has change event -->
-                <!-- make the event listener, in vue instance mounted -->
                     <img v-bind:src="image.url" v-bind:alt="image.description" id="images" @click="selectImage (image.id)"> 
                     <h2 id="images-title">{{image.title}}</h2>
              </div>
@@ -47,14 +42,13 @@
     <script id="popup-image-component-template" type="text/x-template">
         <div class="layout">
             <div class="component">
-                <h1 @click="xClicked" id="x">X</h1>
                 <div>
                     <img v-bind:src="popupImageData.url" id="popup-image">
                 </div>
                 <div id="popup-title-desc-parent">
+                     <h1 @click="xClicked" id="x">X</h1>
                     <h2 id="popup-image-title">Title: {{popupImageData.title}}</h2>
                     <h4 id="popup-image-description">Description: {{popupImageData.description}}</h4>
-                    <!-- <comments-component id="comments-component" :image-id="imageSelected" :image-id="imageId"></comments-component> -->
                     <comments-component id="comments-component" :image-id="imageId"></comments-component>
                 </div>
             </div>
@@ -63,16 +57,13 @@
 
      <script id="comments-component-template" type="text/x-template">
         <div class="comments-component-parent">
-            <!-- <h1 id ="test" @click="test">Hi I am a component for comments section</h1>   -->
             <input v-model="commenttext" name="commenttext" placeholder="comment">
             <input v-model="commentusername" name="commentusername" placeholder="username">
             <button @click="submitComment" id="submit-button">Submit</button>
-            <!-- <div v-for='comment in comments':key="comment.id" :key="image.id" id="comments-child"> -->
             <div v-for='comment in comments' :key="comment.id" id="comments-child">
-                    <!-- <img v-bind:src="image.url" v-bind:alt="image.description" id="images" @click="selectImage (image.id)">  -->
-                    <h2 id="commenttext">{{comment.comment_text}}</h2>
-                    <h2 id="commentusername">{{comment.username}}</h2>
-                    <!-- <h2 id="created-at"></h2> -->
+                    <h3 id="commentusername">{{comment.username}}</h3>
+                    <p id="commenttext">{{comment.comment_text}}</p>
+                    
              </div>
 
         </div>

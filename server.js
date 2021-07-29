@@ -88,7 +88,7 @@ app.get("/showmore/:smallestId", function (req, res) {
 });
 
 app.get("/comments/:imageId", function (req, res) {
-    console.log("req.params", req.params);
+    // console.log("req.params", req.params);
     db.renderComment(req.params.imageId)
         .then(({ rows }) => {
             console.log("results.rows in comments get", req.params);
@@ -99,7 +99,7 @@ app.get("/comments/:imageId", function (req, res) {
 });
 
 app.post("/comment", function (req, res) {
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
     db.submitComment(
         req.body.commenttext,
         req.body.commentusername,
