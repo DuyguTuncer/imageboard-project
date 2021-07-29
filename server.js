@@ -72,6 +72,8 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
                 description: req.body.description,
                 username: req.body.username,
                 url: rows[0].url,
+                created_at: rows[0].created_at
+                // ---------------------------
             });
         })
         .catch((err) => console.log("Error in uploading image", err));
@@ -111,6 +113,7 @@ app.post("/comment", function (req, res) {
                 comment_text: rows[0].comment_text,
                 username: rows[0].username,
                 image_id: rows[0].image_id,
+                created_at: rows[0].created_at,
             });
         })
         .catch((err) => console.log("Error in uploading image", err));

@@ -7,6 +7,7 @@
                 comments: [],
                 commentusername: "",
                 commenttext: "",
+                errorMessage: null
             };
         },
 
@@ -34,11 +35,21 @@
         methods: {
             submitComment: function () {
                 console.log("Submit button clicked");
+                if (
+                    !this.commenttext ||
+                    !this.commentusername
+                ) {
+                    this.errorMessage = true;
+                    return;
+                } else {
+                    this.errorMessage = false;
+                }
                 axios
                     .post("/comment", {
                         commenttext: this.commenttext,
                         commentusername: this.commentusername,
                         imageId: this.imageId,
+                        created_at: this.created_at,
                     })
 
                     .then((results) => {
@@ -99,6 +110,7 @@
             username: "",
             file: null,
             moreButton: true,
+            errorMessage: false,
             imageSelected: null,
         },
         mounted: function () {
@@ -118,6 +130,18 @@
 
         methods: {
             uploadImage: function () {
+                if (
+                    !this.file ||
+                    !this.title ||
+                    !this.description ||
+                    !this.username
+                ) {
+                    this.errorMessage = true;
+                    return;
+                } else {
+                    this.errorMessage = false;
+                }
+
                 console.log("this.title:", this.title);
                 var title = this.title;
                 var description = this.description;

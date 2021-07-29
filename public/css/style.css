@@ -166,7 +166,6 @@ input {
     color: white;
     margin-top: 10px;
     margin-left: 25px;
-    margin-bottom: 300px;
 }
 
 #popup-image-title {
@@ -191,18 +190,17 @@ input {
 }
 
 #comments-child {
-    background-color: grey;
+    background-color: rgb(87, 85, 85);
     border-radius: 10px;
 }
 
 #commenttext {
-    /* position:fixed; */
     color: white;
 }
 
 #commentusername {
     color: white;
-    background-color: darkgray;
+    background-color: rgb(54, 54, 54);
 }
 
 #submit-button {
@@ -211,4 +209,26 @@ input {
     font-size: 20px;
     margin-top: 20px;
     cursor: pointer;
+}
+#created {
+    color:grey;
+    margin-left: 25px;
+    margin-top: 10px;
+    font-size: 12px;
+    margin-bottom: 276px;
+}
+
+#created_at {
+    color:white;
+    font-size: 12px;
+}
+
+#error{
+    text-align: center;
+    margin-top:5px;
+}
+
+#comment-error {
+    color:rgb(245, 161, 161);
+    background-color: black;
 }
