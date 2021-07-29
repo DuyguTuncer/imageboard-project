@@ -1,16 +1,47 @@
 (function () {
     Vue.component("comments-component", {
         template: "#comments-component-template",
-        props: [],
+        props: ["imageId", "commentId"],
         data: function () {
             return {
-                popupImageData: null,
+                comments: [],
+                commentusername: "",
+                commenttext: "",
             };
         },
 
+        mounted: function () {
+            // console.log("component for comments is mounted", this);
+            //
+            let imageId = this.imageId;
+            console.log("imageId", imageId);
+
+            axios
+                .get("/comments/" + imageId)
+                .then((results) => {
+                    this.comments = results.data;
+                })
+                .catch((err) =>
+                    console.log("err in comments component axios: ", err)
+                );
+        },
+
         methods: {
-            test: function () {
-                console.log("I am clicked");
+            submitComment: function () {
+                console.log("Submit button clicked");
+                axios
+                    .post("/comment", {
+                        commenttext: this.commenttext,
+                        commentusername: this.commentusername,
+                        imageId: this.imageId,
+                    })
+
+                    .then((results) => {
+                        this.comments.push(results.data);
+                    })
+                    .catch((err) => {
+                        console.log("error in comments post in vue", err);
+                    });
             },
         },
     });
@@ -59,6 +90,8 @@
             description: "",
             username: "",
             file: null,
+            // Username: "",
+            // comment: "",
             imageSelected: null,
         },
         mounted: function () {
@@ -129,9 +162,9 @@
                     .then((results) => {
                         console.log("results.data:", results.data);
                         this.images.push(results.data[0]) +
-                        this.images.push(results.data[1]) +
-                        this.images.push(results.data[2]) +
-                        this.images.push(results.data[3]);
+                            this.images.push(results.data[1]) +
+                            this.images.push(results.data[2]) +
+                            this.images.push(results.data[3]);
                     })
                     .catch((err) => console.log("err in /showmore: ", err));
             },

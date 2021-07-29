@@ -29,3 +29,12 @@ INSERT INTO images (url, username, title, description) VALUES (
     'To be or not to be',
     'That is the question.'
 );
+
+DROP TABLE IF EXISTS comments;
+
+CREATE TABLE comments(
+    comment_text TEXT NOT NULL,
+    username VARCHAR NOT NULL,
+    image_id   INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

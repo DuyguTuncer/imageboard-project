@@ -30,3 +30,14 @@ module.exports.showMoreImages = (lastId) => {
         [lastId]
     );
 };
+
+module.exports.renderComment = (id) => {
+    return db.query(`SELECT * FROM comments WHERE image_id = ($1);`, [id]);
+};
+
+module.exports.submitComment = (comment, username, image) => {
+    return db.query(
+        `INSERT INTO comments (comment_text, username, image_id) VALUES ($1,$2,$3) RETURNING comment_text, username, image_id, created_at;`,
+        [comment, username, image]
+    );
+};

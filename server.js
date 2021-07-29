@@ -3,6 +3,7 @@ const app = express();
 const db = require("./db");
 
 app.use(express.static("./public"));
+app.use(express.json());
 
 const multer = require("multer");
 const uidSafe = require("uid-safe");
@@ -67,7 +68,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 });
 
 app.get("/showmore/:smallestId", function (req, res) {
-    console.log("req.params", req.params);
+    // console.log("req.params", req.params);
     db.showMoreImages(req.params.smallestId)
         .then(({ rows }) => {
             console.log("results.rows", rows);
@@ -76,6 +77,35 @@ app.get("/showmore/:smallestId", function (req, res) {
         .catch((err) => console.log("Erororo in rendering more images", err));
 });
 
+app.get("/comments/:imageId", function (req, res) {
+    console.log("req.params", req.params);
+    db.renderComment(req.params.imageId)
+        .then(({ rows }) => {
+            console.log("results.rows in comments get", req.params);
+            res.json(rows);
+        })
+        .catch((err) => console.log(err));
+});
+
+app.post("/comment", function (req, res) {
+    console.log("req.body", req.body);
+    db.submitComment(
+        req.body.commenttext,
+        req.body.commentusername,
+        req.body.imageId
+    )
+        .then(({ rows }) => {
+            console.log("results", rows);
+            res.json({
+                comment_text: rows[0].comment,
+                username: rows[0].username,
+                image_id: rows[0].image_id,
+            });
+        })
+        .catch((err) => console.log("Error in uploading image", err));
+});
+
 app.listen(8080, () =>
     console.log("Listening 8080, this time for imageboard!")
 );
+
