@@ -1,2 +1,2 @@
-# imageboard-project
+# imageboard
 
