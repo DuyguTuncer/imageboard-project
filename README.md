@@ -1,6 +1,6 @@
 ## imageboard Project
 
-###### An interactive imageboard in the style of Pinterest, this project demonstrates familiarity with PostGreSQL, Amazon S3, Vue.js provides for SPA (single page app) functionality, with the page dynamically updating it’s contents as they become available.
+#### An interactive imageboard in the style of Pinterest, this project demonstrates familiarity with PostGreSQL, Amazon S3, Vue.js provides for SPA (single page app) functionality, with the page dynamically updating it’s contents as they become available.
 
 https://user-images.githubusercontent.com/83556443/135118957-daa8ab91-b78f-470a-8f8c-b10420880552.mp4
 
@@ -11,7 +11,6 @@ https://user-images.githubusercontent.com/83556443/135118957-daa8ab91-b78f-470a-
 ### Technologies
 
 *Vue.js
-*Masonry layout
 *Amazon Web Services S3
 *bcrypt
 *PostGreSQL
