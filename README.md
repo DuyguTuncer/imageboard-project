@@ -1,6 +1,5 @@
 ## imageboard Project
 
-
 #### An interactive imageboard, single page application built with Vue.js, that allows users to upload images with a title and a description. Other users can review and leave a comment to the uploaded images.
 
 https://user-images.githubusercontent.com/83556443/135118957-daa8ab91-b78f-470a-8f8c-b10420880552.mp4
