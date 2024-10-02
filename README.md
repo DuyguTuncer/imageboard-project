@@ -11,7 +11,7 @@ https://user-images.githubusercontent.com/83556443/135118957-daa8ab91-b78f-470a-
 * Vue.js
 * Amazon Web Services S3
 * bcrypt
-* PostGreSQL
+* PostgreSQL
 * Node.js
 * express.js
 
